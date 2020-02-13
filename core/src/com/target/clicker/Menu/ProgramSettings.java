@@ -17,30 +17,21 @@ public class ProgramSettings implements Screen {
     private TimedPreferences prefs;
 
 
-    //Todo: target decay rate
-    //Todo: pull default values for textfields from storage
-
-    public ProgramSettings(final Game game, final Skin gameSkin){
+    protected ProgramSettings(final Game game, final Skin gameSkin){
         prefs = new TimedPreferences(1,50,20,1);
         prefs = prefs.readFile();
-
-
-
-
 
         stage = new Stage(new ScreenViewport());
         Label title = new Label("Settings", gameSkin,"title-black");
         title.setAlignment(Align.center);
-        title.setY(Gdx.graphics.getHeight()*9/10);
+        title.setY(Gdx.graphics.getHeight()*9/10f);
         title.setWidth(Gdx.graphics.getWidth());
         stage.addActor(title);
 
-
-
         final Label resolution = new Label("Resolution: ", gameSkin, "default");
         resolution.setAlignment(Align.center);
-        resolution.setY(title.getY()- (Gdx.graphics.getHeight()*1/10));
-        resolution.setWidth(Gdx.graphics.getWidth()/4);
+        resolution.setY(title.getY()- (Gdx.graphics.getHeight()/10f));
+        resolution.setWidth(Gdx.graphics.getWidth()/4f);
         resolution.setFontScale(1.2f);
         stage.addActor(resolution);
 
@@ -48,17 +39,15 @@ public class ProgramSettings implements Screen {
         resSel.setItems("1800x1000", "1280x720", "800x600", "600x480", Gdx.graphics.getWidth() + "x" +Gdx.graphics.getHeight());
         resSel.setSelectedIndex(resSel.getItems().size-1);
         resSel.setAlignment(Align.center);
-        resSel.setY(title.getY()- (Gdx.graphics.getHeight()*1/10));
-        resSel.setX(resolution.getX()+resolution.getWidth()+50);
-        resSel.setWidth(Gdx.graphics.getWidth()/4);
+        resSel.setY(title.getY()- (Gdx.graphics.getHeight()*(1/10f)));
+        resSel.setX(resolution.getX()+resolution.getWidth()+50f);
+        resSel.setWidth(Gdx.graphics.getWidth()/4f);
         stage.addActor(resSel);
 
-
-
         TextButton playButton = new TextButton("Back",gameSkin);
-        playButton.setWidth(Gdx.graphics.getWidth()/2);
-        playButton.setPosition(Gdx.graphics.getWidth()/2-playButton.getWidth()/2,
-                Gdx.graphics.getHeight()*1/4-playButton.getHeight()*1/10);
+        playButton.setWidth(Gdx.graphics.getWidth()/2f);
+        playButton.setPosition(Gdx.graphics.getWidth()/2f-playButton.getWidth()/2f,
+                Gdx.graphics.getHeight()/4f-playButton.getHeight()*1/10f);
         playButton.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -92,7 +81,7 @@ public class ProgramSettings implements Screen {
             Double.parseDouble(text);
         }
         catch (Exception e){
-            System.out.println("ERROR,ERROR");
+            System.out.println("ERROR " + e);
             return false;
         }
         return true;
