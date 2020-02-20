@@ -3,13 +3,13 @@ package com.target.clicker;
 public class GameStats {
 
 
-    int misses;
-    int hits;
-    int time;
-    int score;
-    int speed;
-    int spawntime;
-    int size;
+    private int misses;
+    private int hits;
+    private int time;
+    private int score;
+    private int speed;
+    private int spawntime;
+    private int size;
 
     public GameStats()
     {
@@ -31,7 +31,7 @@ public class GameStats {
         this.misses = misses;
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
 
@@ -47,8 +47,8 @@ public class GameStats {
         this.time = time;
     }
 
-    public double getAdjustedScore() {
-        return (score*((1 + .1*spawntime)+ (1 +  0.05*speed )))/(size/60);
+    double getAdjustedScore() {
+        return (score*((1 + .1*spawntime)+ (1 +  0.05*speed )))*(60f/size);
     }
 
     public void setSize(int size) {

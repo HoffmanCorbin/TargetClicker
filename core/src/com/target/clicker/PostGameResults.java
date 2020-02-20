@@ -35,7 +35,7 @@ public class PostGameResults implements Screen {
         final MenuLabel scoreLbl = new MenuLabel("Score: ", gameSkin, 10,1,1);
         stage.addActor(scoreLbl);
 
-        final MenuLabel score = new MenuLabel(String.valueOf(stats.score) , gameSkin,10,1,2);
+        final MenuLabel score = new MenuLabel(String.valueOf(stats.getScore()) , gameSkin,10,1,2);
         stage.addActor(score);
 
 
@@ -50,9 +50,9 @@ public class PostGameResults implements Screen {
 
 
         TextButton playButton = new TextButton("Back",gameSkin);
-        playButton.setWidth(Gdx.graphics.getWidth()/2);
-        playButton.setPosition(Gdx.graphics.getWidth()/2-playButton.getWidth()/2,
-                Gdx.graphics.getHeight()*1/4-playButton.getHeight()*1/10);
+        playButton.setWidth(Gdx.graphics.getWidth()/2f);
+        playButton.setPosition(Gdx.graphics.getWidth()/2f-playButton.getWidth()/2,
+                Gdx.graphics.getHeight()/4f-playButton.getHeight()*1/10f);
         playButton.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {

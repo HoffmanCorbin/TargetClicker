@@ -9,8 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.target.clicker.Menu.MainMenu;
 
-  /*TODO: Add a borderless circle to the middle. Spawn targets only if mouse is in that circle.
-    Targets despawn quickly.*/
 
 public class FlickAccuracy implements Screen {
 
@@ -26,6 +24,7 @@ public class FlickAccuracy implements Screen {
     private Scorebox scorebox;
     private double timeRemaining;
     private int score;
+    private Mark mark;
 
 
     public FlickAccuracy(Game game, Skin skin, int difficulty){
@@ -41,6 +40,7 @@ public class FlickAccuracy implements Screen {
         this.game = game;
         this.skin = skin;
         this.difficulty = difficulty;
+
     }
 
     @Override
@@ -58,9 +58,9 @@ public class FlickAccuracy implements Screen {
 
 
 
-        hitbox.setPosition(new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
-        hitbox.setRadius(Gdx.graphics.getHeight()/14);
-        shape.circle(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getHeight()/14);
+        hitbox.setPosition(new Vector2(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f));
+        hitbox.setRadius(Gdx.graphics.getHeight()/14f);
+        shape.circle(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f, Gdx.graphics.getHeight()/14f);
         shape.end();
 
         if(hitbox.contains(Gdx.input.getX(),Gdx.input.getY())){
@@ -91,24 +91,27 @@ public class FlickAccuracy implements Screen {
         timeRemaining = timeRemaining-Gdx.graphics.getDeltaTime();
 
         scorebox.render(score,timeRemaining);
+        if(mark!=null) {
+            mark.render();
+        }
 
     }
 
-    public void shoot(){
-
-        // Sound sound = Gdx.audio.newSound(Gdx.files.internal("data/mysound.mp3"));
-        // if(test.hit(mouseLoc.x,mouseLoc.y))System.out.println("Boop");
-
+    private void shoot(){
 
         if(target!=null) {
             if (target.hit(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 target = null;
                 score++;
                 targetCount = 0;
-                return;
-            } else {
+            }else {
+                mark = new Mark(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(),40);
                 score = score - 3;
             }
+        }
+        else{
+            mark = new Mark(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(),40);
+            score = score - 3;
         }
 
     }
