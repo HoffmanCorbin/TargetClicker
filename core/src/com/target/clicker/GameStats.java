@@ -48,7 +48,7 @@ public class GameStats {
     }
 
     double getAdjustedScore() {
-        return (score*((1 + .1*spawntime)+ (1 +  0.05*speed )))*(60f/size);
+        return (score+(0.1*((.5*(spawntime-1))+ (0.1*speed)+(.05 * ( 60-size)))));
     }
 
     public void setSize(int size) {
