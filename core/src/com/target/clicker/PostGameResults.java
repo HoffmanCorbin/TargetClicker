@@ -45,8 +45,23 @@ public class PostGameResults implements Screen {
         final MenuLabel adjScore = new MenuLabel(String.valueOf(stats.getAdjustedScore()), gameSkin,10,2,2);
         stage.addActor(adjScore);
 
+        final MenuLabel targetsHitLbl = new MenuLabel("Targets Hit: ", gameSkin, 10, 3,1);
+        stage.addActor(targetsHitLbl);
 
+        final MenuLabel targetsHit = new MenuLabel(String.valueOf(stats.getHits()),gameSkin,10,3,2);
+        stage.addActor(targetsHit);
 
+        final MenuLabel targetsMissedlbl = new MenuLabel("Missed Clicks: ", gameSkin,10,4,1);
+        stage.addActor(targetsMissedlbl);
+
+        final MenuLabel targetsMissed = new MenuLabel(String.valueOf(stats.getMisses()),gameSkin,10,4,2);
+        stage.addActor(targetsMissed);
+
+        final MenuLabel timelbl = new MenuLabel("Time: ", gameSkin, 10,5,1);
+        stage.addActor(timelbl);
+
+        final MenuLabel time = new MenuLabel(String.valueOf(stats.getTime()),gameSkin,10,5,2);
+        stage.addActor(time);
 
 
         TextButton playButton = new TextButton("Back",gameSkin);

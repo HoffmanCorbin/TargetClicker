@@ -22,10 +22,10 @@ public class Timed implements Screen {
     private int misses = 0;
     private boolean makeTarget=false;
     private Vector3 mouseLoc;
-    public ArrayList<Target> targets;
+    private ArrayList<Target> targets;
     private Target test;
 
-    public ArrayList<Mark> marks;
+    private ArrayList<Mark> marks;
 
     private int decayRate;
     private int speed;
@@ -102,7 +102,7 @@ public class Timed implements Screen {
 
             this.dispose();
             GameStats stats = new GameStats();
-            stats.setHits(score+(misses*3));
+            stats.setHits(score+(misses*2));
             stats.setMisses(misses);
             stats.setScore(score);
             stats.setTime((int)time);
@@ -115,7 +115,7 @@ public class Timed implements Screen {
 
     }
 
-    public void testThread(){
+    private void testThread(){
         Thread thread = new Thread(){
             public void run(){
                 makeTarget=true;
@@ -130,7 +130,7 @@ public class Timed implements Screen {
         thread.start();
     }
 
-    public void shoot(){
+    private void shoot(){
 
 
         for(int i= 0; i< targets.size();i++){
@@ -142,7 +142,7 @@ public class Timed implements Screen {
 
         }
         marks.add(new Mark(mouseLoc.x, mouseLoc.y,size));
-        score = score - 3;
+        score = score - 2;
         misses++;
     }
 
