@@ -9,16 +9,26 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.target.clicker.Menu.MainMenu;
 import com.target.clicker.Menu.MenuLabel;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.*;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 
 public class PostGameResults implements Screen {
     private Stage stage;
+    private GameStats stats;
 
 
-    public PostGameResults(final Game game, final Skin gameSkin, GameStats stats, String mode){
+    public PostGameResults(final Game game, final Skin gameSkin, GameStats stats, String mode) {
 
 
 
@@ -39,10 +49,10 @@ public class PostGameResults implements Screen {
         stage.addActor(score);
 
 
-        final MenuLabel adjScoreLbl = new MenuLabel("Adjusted Score: ", gameSkin,10,2,1);
+        final MenuLabel adjScoreLbl = new MenuLabel("Hit %: ", gameSkin,10,2,1);
         stage.addActor(adjScoreLbl);
 
-        final MenuLabel adjScore = new MenuLabel(String.valueOf(stats.getAdjustedScore()), gameSkin,10,2,2);
+        final MenuLabel adjScore = new MenuLabel(String.valueOf(stats.getHits()/(stats.getHits()+stats.getMisses())), gameSkin,10,2,2);
         stage.addActor(adjScore);
 
         final MenuLabel targetsHitLbl = new MenuLabel("Targets Hit: ", gameSkin, 10, 3,1);
@@ -82,9 +92,55 @@ public class PostGameResults implements Screen {
         stage.addActor(playButton);
 
 
+        this.stats=stats;
+
+        try {
+            fileWrite();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void fileWrite() throws IOException {
+
+        JSONArray array;
 
 
 
+
+        if(Files.exists(Paths.get("stats.json"))) {
+            String text = new String(Files.readAllBytes(Paths.get("stats.json")));
+            System.out.println(text);
+
+
+            array = new JSONArray(text);
+        }
+        else{
+            array = new JSONArray();
+        }
+
+
+
+
+
+
+
+        Writer writer = new FileWriter("stats.json");
+        JSONWriter jsonWrite = new JSONWriter(writer);
+        JSONObject jsonStats = new JSONObject();
+        jsonStats.put("Mode", stats.getMode());
+        jsonStats.put("Hits", stats.getHits());
+        jsonStats.put("Misses",stats.getMisses());
+        jsonStats.put("Hit Percent",stats.getHits()/(stats.getHits()+stats.getMisses()));
+        jsonStats.put("Score", stats.getScore());
+
+        array.put(jsonStats);
+
+
+        writer.write(array.toString());
+        writer.close();
 
     }
 

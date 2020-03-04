@@ -35,6 +35,7 @@ public class Timed implements Screen {
     private Game game;
     private Skin gameSkin;
 
+    private Settings set;
 
     private Scorebox box ;
 
@@ -51,6 +52,7 @@ public class Timed implements Screen {
 
         box = new Scorebox();
 
+        set.setMode("Advanced");
 
         decayRate = 3;
     }
@@ -66,6 +68,7 @@ public class Timed implements Screen {
 
         box = new Scorebox();
 
+        this.set = set;
 
         decayRate = 3;
 
@@ -128,6 +131,7 @@ public class Timed implements Screen {
             stats.setSize(size);
             stats.setSpeed(quickness);
             stats.setSpawntime(speed);
+            stats.setMode(set.getMode());
             game.setScreen(new PostGameResults(game,gameSkin, stats, "Timed"));
 
         }

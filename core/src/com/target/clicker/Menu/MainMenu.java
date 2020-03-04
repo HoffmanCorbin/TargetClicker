@@ -83,6 +83,11 @@ public class MainMenu implements Screen {
         });
         stage.addActor(exitButton);
 
+        TextButton statsButton = new TextButton("Stats",gameSkin);
+        statsButton.setWidth(60);
+        statsButton.setPosition(Gdx.graphics.getWidth()-statsButton.getWidth(),0);
+        stage.addActor(statsButton);
+
 
     }
 
@@ -119,6 +124,7 @@ public class MainMenu implements Screen {
                     easy.setSize(50);
                     easy.setSpeed(2);
                     easy.setRemainingTime(30);
+                    easy.setMode("Easy");
                     enterMeaningfulNameHere.setScreen(new Timed(easy));
 
                 }
@@ -128,6 +134,7 @@ public class MainMenu implements Screen {
                     med.setSize(50);
                     med.setSpeed(3);
                     med.setRemainingTime(30);
+                    med.setMode("Medium");
                     enterMeaningfulNameHere.setScreen(new Timed(med));
 
                 }
@@ -137,6 +144,7 @@ public class MainMenu implements Screen {
                     hard.setSize(40);
                     hard.setSpeed(4);
                     hard.setRemainingTime(30);
+                    hard.setMode("Hard");
                     enterMeaningfulNameHere.setScreen(new Timed(hard));
                 }
                 if(obj.equals("Advanced")){

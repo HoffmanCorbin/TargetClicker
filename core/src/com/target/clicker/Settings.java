@@ -10,6 +10,7 @@ public class Settings{
     private int quickness;
     private Game game;
     private Skin gameSkin;
+    private String mode;
 
     public Settings(Game game, Skin gameskin){
         this.game = game;
@@ -58,5 +59,13 @@ public class Settings{
 
     public void setQuickness(int quickness) {
         this.quickness = quickness;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }

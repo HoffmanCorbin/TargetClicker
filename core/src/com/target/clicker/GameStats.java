@@ -10,6 +10,7 @@ public class GameStats {
     private int speed;
     private int spawntime;
     private int size;
+    private String mode;
 
     public GameStats()
     {
@@ -73,5 +74,13 @@ public class GameStats {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }
