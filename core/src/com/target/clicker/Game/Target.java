@@ -21,7 +21,7 @@ public class Target{
     private int hp;
     private float x;
     private float y;
-    public double timeElapsed;
+    private double timeElapsed;
     private Random random;
     private int counter =0;
 
@@ -38,7 +38,7 @@ public class Target{
         GdxNativesLoader.load();
     }
 
-    public Target(Vector2 windowSize, int size, int speed){
+    Target(Vector2 windowSize, int size, int speed){
         this.windowSize = windowSize;
 
         shape = new ShapeRenderer();
@@ -73,33 +73,29 @@ public class Target{
             shape.circle(x, y, size);
             shape.end();
 
-            counter++;
-           if(counter%1000 ==0) {
-               size++;
-           }
         }
     }
 
     private void move(){
-        if(x < windowSize.x - size/2 && x > 0+size) {
+        if(x < windowSize.x - size/2f && x > size) {
 
 
-            x = (float) (x + direction.x + (direction.x*(1 + timeElapsed)));
+            x =  (x + direction.x + (direction.x*((float)-timeElapsed/100f)));
         }
         else{
             direction.x = direction.x*-1;
-            x = (float) (x + direction.x + (direction.x *(1 + timeElapsed)));
+            x = (x + direction.x + (direction.x *((float)-timeElapsed/100f)));
         }
 
-        if(y < windowSize.y&& y -size/2> 0+size) {
-            y = (float) (y + direction.y + (direction.y * (1 + timeElapsed)));
+        if(y < windowSize.y&& y -size/2f> size) {
+            y =  (y + direction.y + (direction.y*((float)-timeElapsed/100f)));
         }
         else{
             direction.y = direction.y *-1;
-            y = (float) (y + direction.y + (direction.y * (1 + timeElapsed)));
+            y =  (y + direction.y + (direction.y *((float)-timeElapsed/100f)));
         }
     }
-    public void dispose(){
+    void dispose(){
         shape = null;
         hitbox = null;
     }
@@ -125,7 +121,7 @@ public class Target{
 
     }
 
-    public boolean hit(float x, float y){
+    boolean hit(float x, float y){
         if(hitbox.contains(x,y))return true;
         return false;
         

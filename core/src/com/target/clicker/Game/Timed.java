@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.target.clicker.GameStats;
 import com.target.clicker.Menu.MainMenu;
 import com.target.clicker.PostGameResults;
+import com.target.clicker.Settings;
 
 
 import java.util.ArrayList;
@@ -52,6 +53,24 @@ public class Timed implements Screen {
 
 
         decayRate = 3;
+    }
+
+    public Timed(Settings set){
+        this.speed = set.getSpeed();
+        this.size = set.getSize();
+        this.quickness = set.getQuickness();
+        this.remainingTime = set.getRemainingTime();
+
+        this.game = set.getGame();
+        this.gameSkin = set.getGameSkin();
+
+        box = new Scorebox();
+
+
+        decayRate = 3;
+
+
+
     }
 
 
