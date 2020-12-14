@@ -38,6 +38,8 @@ public class MainMenu implements Screen {
         title.setWidth(Gdx.graphics.getWidth());
         stage.addActor(title);
 
+
+        //play button
         TextButton playButton = new TextButton("Play!",gameSkin);
         playButton.setWidth(Gdx.graphics.getWidth()/2f);
         playButton.setPosition(Gdx.graphics.getWidth()/2f-playButton.getWidth()/2f,Gdx.graphics.getHeight()/2f-playButton.getHeight()/2f);
@@ -53,6 +55,8 @@ public class MainMenu implements Screen {
         });
         stage.addActor(playButton);
 
+
+        //options button
         TextButton optionsButton = new TextButton("Options",gameSkin);
         optionsButton.setWidth(Gdx.graphics.getWidth()/2f);
         optionsButton.setPosition(Gdx.graphics.getWidth()/2f-optionsButton.getWidth()/2f,Gdx.graphics.getHeight()/3f-optionsButton.getHeight()/2f);
@@ -68,6 +72,7 @@ public class MainMenu implements Screen {
         });
         stage.addActor(optionsButton);
 
+        //exit button
         TextButton exitButton = new TextButton("Exit",gameSkin);
         exitButton.setWidth(Gdx.graphics.getWidth()/2f);
         exitButton.setPosition(Gdx.graphics.getWidth()/2f-optionsButton.getWidth()/2f,Gdx.graphics.getHeight()/6f-optionsButton.getHeight()/2f);
@@ -83,6 +88,7 @@ public class MainMenu implements Screen {
         });
         stage.addActor(exitButton);
 
+        //stats button
         TextButton statsButton = new TextButton("Stats",gameSkin);
         statsButton.setWidth(60);
         statsButton.setPosition(Gdx.graphics.getWidth()-statsButton.getWidth(),0);
@@ -99,7 +105,7 @@ public class MainMenu implements Screen {
                    newTimedMenu();
                }
                if(obj.equals("Flick")){
-                   enterMeaningfulNameHere.setScreen(new FlickAccuracy(enterMeaningfulNameHere,gameSkin,3));
+                   newFlickMenu();
                }
             }
         };
@@ -170,17 +176,14 @@ public class MainMenu implements Screen {
         Dialog dialog = new Dialog("Select a difficulty", gameSkin, "c2") {
             public void result(Object obj) {
                 if(obj.equals("Easy")){
-
-
+                    enterMeaningfulNameHere.setScreen(new FlickAccuracy(enterMeaningfulNameHere,gameSkin,1));
                 }
                 if(obj.equals("Medium")){
-
-
+                    enterMeaningfulNameHere.setScreen(new FlickAccuracy(enterMeaningfulNameHere,gameSkin,3));
                 }
                 if(obj.equals("Hard")){
-
+                    enterMeaningfulNameHere.setScreen(new FlickAccuracy(enterMeaningfulNameHere,gameSkin,5));
                 }
-
             }
         };
         dialog.text("Select Game Mode");
