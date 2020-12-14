@@ -116,7 +116,7 @@ public class MainMenu implements Screen {
     }
 
     private void newTimedMenu(){
-        Dialog dialog = new Dialog("", gameSkin, "c2") {
+        Dialog dialog = new Dialog("Select a difficulty", gameSkin, "c2") {
             public void result(Object obj) {
                 if(obj.equals("Easy")){
                     Settings easy = new Settings(enterMeaningfulNameHere,gameSkin);
@@ -164,6 +164,37 @@ public class MainMenu implements Screen {
         dialog.setScale(1.1f,1.1f);
         dialog.setPosition(Gdx.graphics.getWidth()/2-dialog.getWidth()/2, Gdx.graphics.getHeight()/2);
         stage.addActor(dialog);
+    }
+
+    private void newFlickMenu(){
+        Dialog dialog = new Dialog("Select a difficulty", gameSkin, "c2") {
+            public void result(Object obj) {
+                if(obj.equals("Easy")){
+
+
+                }
+                if(obj.equals("Medium")){
+
+
+                }
+                if(obj.equals("Hard")){
+
+                }
+
+            }
+        };
+        dialog.text("Select Game Mode");
+
+        dialog.button("Easy", "Easy");
+        dialog.button("Medium", "Medium");
+        dialog.button("Hard", "Hard");
+        dialog.button("Cancel",false);
+        dialog.key(Input.Keys.ENTER, true);
+        dialog.pack();
+        dialog.setScale(1.1f,1.1f);
+        dialog.setPosition(Gdx.graphics.getWidth()/2-dialog.getWidth()/2, Gdx.graphics.getHeight()/2);
+        stage.addActor(dialog);
+
     }
 
 

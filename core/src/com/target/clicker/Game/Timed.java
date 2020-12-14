@@ -51,7 +51,7 @@ public class Timed implements Screen {
         this.gameSkin = gameSkin;
 
         box = new Scorebox();
-
+        set = new com.target.clicker.Settings(game,gameSkin);
         set.setMode("Advanced");
 
         decayRate = 3;
