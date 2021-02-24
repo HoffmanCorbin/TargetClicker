@@ -50,6 +50,9 @@ public class FlickAccuracy implements Screen {
 
     @Override
     public void render(float delta) {
+
+        if(timeRemaining<=0)dispose();
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClearColor(163/255f, 137/255f, 137/255f, 1);
 
