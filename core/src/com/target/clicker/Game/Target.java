@@ -38,6 +38,12 @@ public class Target{
         GdxNativesLoader.load();
     }
 
+    /**
+     * Default constructor
+     * @param windowSize - The size of the actual game window
+     * @param size - The size of the target
+     * @param speed - The speed of the target
+     */
     Target(Vector2 windowSize, int size, int speed){
         this.windowSize = windowSize;
 
@@ -57,6 +63,7 @@ public class Target{
     }
 
     public void render(){
+        // Renders if not destroyed
         if(!destroyed) {
 
             shape.setColor(Color.WHITE);

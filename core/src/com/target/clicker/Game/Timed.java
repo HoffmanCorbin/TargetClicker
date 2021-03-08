@@ -40,7 +40,15 @@ public class Timed implements Screen {
     private Scorebox box ;
 
 
-
+    /**
+     * Default constructor
+     * @param speed - The speed in which targets spawn
+     * @param size - The size of targets
+     * @param remainingTime - The time remaining in the game
+     * @param quickness - The speed the targets move
+     * @param game - The game object
+     * @param gameSkin - The skin for the UI elements and font
+     */
     public Timed(int speed, int size, int remainingTime, int quickness, Game game, Skin gameSkin){
         this.speed = speed;
         this.size = size;
@@ -57,6 +65,10 @@ public class Timed implements Screen {
         decayRate = 3;
     }
 
+    /**
+     *
+     * @param set - The settings object containing the settings necessary to run the game
+     */
     public Timed(Settings set){
         this.speed = set.getSpeed();
         this.size = set.getSize();
@@ -99,27 +111,34 @@ public class Timed implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClearColor(163/255f, 137/255f, 137/255f, 1);
 
-        //calculates usable mouselocation
+        // calculates usable mouselocation
         mouseLoc.set(Gdx.input.getX(), (Gdx.graphics.getHeight() - Gdx.input.getY()), 0);
 
         box.render(score, remainingTime);
 
+
+        // creates a new target based on the size of the screen and settings
         if(makeTarget){
             targets.add(new Target(new Vector2(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()), size, quickness));
             makeTarget=false;
         }
 
+        // renders marks for missed shots
         for(Mark m : marks){
             m.render();
         }
 
+        // renders targets
         for(Target t: targets){
                 t.render();
         }
 
-      time = time +  Gdx.graphics.getDeltaTime();
+        time = time +  Gdx.graphics.getDeltaTime();
         remainingTime = remainingTime-Gdx.graphics.getDeltaTime();
 
+
+
+        // closes the game and creates a postgame screen at 0 seconds
         if(remainingTime <0){
 
             this.dispose();
@@ -138,6 +157,8 @@ public class Timed implements Screen {
 
     }
 
+
+    // creates a thread to calculate time asynchronously rather than waiting in the main update loop
     private void testThread(){
         Thread thread = new Thread(){
             public void run(){

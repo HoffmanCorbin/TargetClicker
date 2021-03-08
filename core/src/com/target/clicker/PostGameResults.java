@@ -52,7 +52,7 @@ public class PostGameResults implements Screen {
         final MenuLabel adjScoreLbl = new MenuLabel("Hit %: ", gameSkin,10,2,1);
         stage.addActor(adjScoreLbl);
 
-        final MenuLabel adjScore = new MenuLabel(String.valueOf(stats.getHits()/(stats.getHits()+stats.getMisses())), gameSkin,10,2,2);
+        final MenuLabel adjScore = new MenuLabel(String.valueOf(1.0*stats.getHits()/(stats.getHits()+stats.getMisses())), gameSkin,10,2,2);
         stage.addActor(adjScore);
 
         final MenuLabel targetsHitLbl = new MenuLabel("Targets Hit: ", gameSkin, 10, 3,1);
@@ -133,7 +133,7 @@ public class PostGameResults implements Screen {
         jsonStats.put("Mode", stats.getMode());
         jsonStats.put("Hits", stats.getHits());
         jsonStats.put("Misses",stats.getMisses());
-        jsonStats.put("Hit Percent",stats.getHits()/(stats.getHits()+stats.getMisses()));
+        jsonStats.put("Hit Percent",1.0*stats.getHits()/(stats.getHits()+stats.getMisses()));
         jsonStats.put("Score", stats.getScore());
 
         array.put(jsonStats);
