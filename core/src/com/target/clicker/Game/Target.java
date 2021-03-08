@@ -109,22 +109,12 @@ public class Target{
 
     private Vector2 determineLocation(){
 
-        Vector2 temp = new Vector2();
-        if(x > windowSize.x){
-            temp.x = -speed;
-        }
-        else{
-            temp.x= speed;
-        }
-        if(y > windowSize.y){
-            temp.y = -speed;
-        }
-        else{
-            temp.y = speed;
-        }
 
+        double x = Math.random()-0.5;
+        double y = Math.random()-0.5;
 
-        return temp;
+        return new Vector2((float) ((float)x/Math.abs(x))*speed,((float) ((float)y/Math.abs(y)))*speed);
+
 
     }
 
