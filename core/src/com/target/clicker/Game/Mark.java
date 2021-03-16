@@ -1,6 +1,7 @@
 package com.target.clicker.Game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,17 +16,19 @@ import com.target.clicker.GameStats;
 public class Mark {
     private float x;
     private float y;
-    private int size;
+    private float size;
     private int counter = 255;
     private boolean decrease=false;
     private ShapeRenderer shape;
 
 
-    Mark(float x, float y, int size){
+    Mark(float x, float y, float size){
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.size = size *(Gdx.graphics.getHeight()/1080f);
         shape = new ShapeRenderer();
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal("buzz.wav"));
+        sound.play();
 
     }
 

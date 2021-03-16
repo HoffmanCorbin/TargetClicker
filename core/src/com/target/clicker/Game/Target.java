@@ -2,6 +2,7 @@ package com.target.clicker.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -119,8 +120,16 @@ public class Target{
 
     }
 
+    //TODO: add sound attribution at
+
     boolean hit(float x, float y){
-        if(hitbox.contains(x,y))return true;
+        if(hitbox.contains(x,y)) {
+
+            Sound sound = Gdx.audio.newSound(Gdx.files.internal("pop.wav"));
+            sound.play(1.0f);
+            return true;
+
+        }
         return false;
         
     }

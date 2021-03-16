@@ -18,6 +18,8 @@ import com.target.clicker.Game.FlickAccuracy;
 import com.target.clicker.Game.Timed;
 import com.target.clicker.Settings;
 
+import java.io.IOException;
+
 
 public class MainMenu implements Screen {
     private Stage stage;
@@ -92,6 +94,18 @@ public class MainMenu implements Screen {
         TextButton statsButton = new TextButton("Stats",gameSkin);
         statsButton.setWidth(60);
         statsButton.setPosition(Gdx.graphics.getWidth()-statsButton.getWidth(),0);
+        statsButton.addListener(new InputListener(){
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button){
+                try {
+                    enterMeaningfulNameHere.setScreen(new StatsPage(enterMeaningfulNameHere,gameSkin));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+
+        });
         stage.addActor(statsButton);
 
 

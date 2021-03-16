@@ -112,10 +112,9 @@ public class PostGameResults implements Screen {
 
         if(Files.exists(Paths.get("stats.json"))) {
             String text = new String(Files.readAllBytes(Paths.get("stats.json")));
-            System.out.println(text);
+            if(text.equals(""))array = new JSONArray();
+            else array = new JSONArray(text);
 
-
-            array = new JSONArray(text);
         }
         else{
             array = new JSONArray();
