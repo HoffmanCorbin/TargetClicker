@@ -1,5 +1,6 @@
 package com.target.clicker.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
@@ -12,6 +13,10 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.samples = 4;
 		config.resizable=false;
+
+		config.width = 1280;
+		config.height = 720;
+
 
 
 		new World(new Vector2(0f,0f), false);

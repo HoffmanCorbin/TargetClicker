@@ -2,6 +2,7 @@ package com.target.clicker.Menu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -36,13 +37,23 @@ public class ProgramSettings implements Screen {
         stage.addActor(resolution);
 
         final SelectBox resSel = new SelectBox( gameSkin,"default");
-        resSel.setItems("1800x1000", "1280x720", "800x600", "600x480", Gdx.graphics.getWidth() + "x" +Gdx.graphics.getHeight());
+        resSel.setItems("1920x1080", "1280x720", "800x600", "600x480", Gdx.graphics.getWidth() + "x" +Gdx.graphics.getHeight());
         resSel.setSelectedIndex(resSel.getItems().size-1);
         resSel.setAlignment(Align.center);
         resSel.setY(title.getY()- (Gdx.graphics.getHeight()*(1/10f)));
         resSel.setX(resolution.getX()+resolution.getWidth()+50f);
         resSel.setWidth(Gdx.graphics.getWidth()/4f);
         stage.addActor(resSel);
+
+        final CheckBox fullscreenSel = new CheckBox("Fullscreen", gameSkin, "default");
+        fullscreenSel.setY(title.getY()- (Gdx.graphics.getHeight()*(3/10f)));
+        fullscreenSel.setX(resolution.getX()+resolution.getWidth()+50f);
+        fullscreenSel.setWidth(Gdx.graphics.getWidth()/4f);
+        // Sets checked if the game is already fullscreen
+        if(Gdx.graphics.isFullscreen())fullscreenSel.setChecked(true);
+        stage.addActor(fullscreenSel);
+
+
 
         TextButton playButton = new TextButton("Back",gameSkin);
         playButton.setWidth(Gdx.graphics.getWidth()/2f);
@@ -55,7 +66,9 @@ public class ProgramSettings implements Screen {
                 String temp = (String)resSel.getSelected();
                 String temps[] = temp.split("x", 2);
 
+
                 Gdx.graphics.setWindowedMode(Integer.parseInt(temps[0]),Integer.parseInt(temps[1]));
+                if(fullscreenSel.isChecked())Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                game.setScreen(new MainMenu(game,gameSkin));
             }
             @Override

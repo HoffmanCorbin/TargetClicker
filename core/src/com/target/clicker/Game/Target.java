@@ -32,7 +32,7 @@ public class Target{
 
 
     private Vector2 windowSize;
-    private int size;
+    private float size;
     private Boolean destroyed = false;
     static{
         GdxNativesLoader.load();
@@ -44,13 +44,14 @@ public class Target{
      * @param size - The size of the target
      * @param speed - The speed of the target
      */
-    Target(Vector2 windowSize, int size, int speed){
+    Target(Vector2 windowSize, float size, int speed){
         this.windowSize = windowSize;
 
         shape = new ShapeRenderer();
         hitbox = new Circle();
         hp =1;
-        this.size = size;
+        this.size = size*(Gdx.graphics.getHeight()/1080f);
+
 
         random = new Random();
         x= random.nextInt((int)((windowSize.x - (size*3))))+(size*1.5f);
