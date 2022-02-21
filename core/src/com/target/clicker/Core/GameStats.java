@@ -1,7 +1,6 @@
-package com.target.clicker;
+package com.target.clicker.Core;
 
 public class GameStats {
-
 
     private int misses;
     private int hits;
@@ -32,7 +31,7 @@ public class GameStats {
         this.misses = misses;
     }
 
-    int getScore() {
+    public int getScore() {
         return score;
     }
 

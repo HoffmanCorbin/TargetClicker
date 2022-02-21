@@ -1,4 +1,4 @@
-package com.target.clicker.Menu;
+package com.target.clicker.UI.Menu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -8,17 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.target.clicker.Game.Timed;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -75,11 +69,6 @@ public class StatsPage implements Screen {
             }
         });
         stage.addActor(backButton);
-
-
-
-
-
     }
 
     @Override
@@ -92,8 +81,6 @@ public class StatsPage implements Screen {
         File file = new File("stats.json");
         if(!file.exists()){
             file.createNewFile();
-
-
         }
 
         String text = new String(Files.readAllBytes(Paths.get("stats.json")));
@@ -105,25 +92,16 @@ public class StatsPage implements Screen {
             return labels;
         }
 
-
         JSONArray array = new JSONArray(text);
         Label[] labels = new Label[array.length()];
-
 
         for(int i = 0; i < array.length();i++){
             Label statLabel = new Label( array.getJSONObject(i).toString(),gameSkin,"default");
             statLabel.setY(Gdx.graphics.getHeight()-(i+1*30));
             labels[i] = statLabel;
         }
-
-       // jsonStats.put("Mode", stats.getMode());
-       // jsonStats.put("Hits", stats.getHits());
-      //  jsonStats.put("Misses",stats.getMisses());
-       // jsonStats.put("Hit Percent",1.0*stats.getHits()/(stats.getHits()+stats.getMisses()));
-        //jsonStats.put("Score", stats.getScore());
         return labels;
     }
-
 
     @Override
     public void render(float delta) {
@@ -131,7 +109,6 @@ public class StatsPage implements Screen {
         Gdx.gl.glClearColor(222/255f, 255/255f, 230/255f,1);
         stage.act();
         stage.draw();
-
     }
 
     @Override

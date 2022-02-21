@@ -1,12 +1,10 @@
-package com.target.clicker.Game;
+package com.target.clicker.Game.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.target.clicker.GameStats;
 
 /***
  * This class works with the marking to be added to the background after a miss
@@ -22,7 +20,7 @@ public class Mark {
     private ShapeRenderer shape;
 
 
-    Mark(float x, float y, float size){
+    public Mark(float x, float y, float size){
         this.x = x;
         this.y = y;
         this.size = size *(Gdx.graphics.getHeight()/1080f);

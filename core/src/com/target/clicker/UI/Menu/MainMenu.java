@@ -1,4 +1,4 @@
-package com.target.clicker.Menu;
+package com.target.clicker.UI.Menu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -14,17 +14,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.target.clicker.Game.FlickAccuracy;
-import com.target.clicker.Game.Timed;
-import com.target.clicker.Settings;
+import com.target.clicker.Game.Modes.FlickAccuracy;
+import com.target.clicker.Game.Modes.Standard;
+import com.target.clicker.Core.Settings;
 
 import java.io.IOException;
 
 
 public class MainMenu implements Screen {
-    private Stage stage;
-    private Skin gameSkin;
-    private Game enterMeaningfulNameHere;
+    private final Stage stage;
+    private final Skin gameSkin;
+    private final Game enterMeaningfulNameHere;
 
     public MainMenu(final Game enterMeaningfulNameHere, final Skin gameSkin){
 
@@ -56,7 +56,6 @@ public class MainMenu implements Screen {
             }
         });
         stage.addActor(playButton);
-
 
         //options button
         TextButton optionsButton = new TextButton("Options",gameSkin);
@@ -114,9 +113,9 @@ public class MainMenu implements Screen {
     private void newDialogueMenu(){
         Dialog dialog = new Dialog("", gameSkin, "c2") {
             public void result(Object obj) {
-               if(obj.equals("Timed")){
+               if(obj.equals("Standard")){
                   // enterMeaningfulNameHere.setScreen(new GameSettings(enterMeaningfulNameHere,gameSkin));
-                   newTimedMenu();
+                   newStandardMenu();
                }
                if(obj.equals("Flick")){
                    newFlickMenu();
@@ -125,7 +124,7 @@ public class MainMenu implements Screen {
         };
         dialog.text("Select Game Mode");
 
-        dialog.button("Timed", "Timed");
+        dialog.button("Standard", "Standard");
         dialog.button("Flick", "Flick");
         dialog.button("Cancel", false);
         dialog.key(Input.Keys.ENTER, true);
@@ -135,7 +134,7 @@ public class MainMenu implements Screen {
         stage.addActor(dialog);
     }
 
-    private void newTimedMenu(){
+    private void newStandardMenu(){
         Dialog dialog = new Dialog("Select a difficulty", gameSkin, "c2") {
             public void result(Object obj) {
                 if(obj.equals("Easy")){
@@ -145,8 +144,7 @@ public class MainMenu implements Screen {
                     easy.setSpeed(2);
                     easy.setRemainingTime(30);
                     easy.setMode("Easy");
-                    enterMeaningfulNameHere.setScreen(new Timed(easy));
-
+                    enterMeaningfulNameHere.setScreen(new Standard(easy));
                 }
                 if(obj.equals("Medium")){
                     Settings med = new Settings(enterMeaningfulNameHere,gameSkin);
@@ -155,7 +153,7 @@ public class MainMenu implements Screen {
                     med.setSpeed(3);
                     med.setRemainingTime(30);
                     med.setMode("Medium");
-                    enterMeaningfulNameHere.setScreen(new Timed(med));
+                    enterMeaningfulNameHere.setScreen(new Standard(med));
 
                 }
                 if(obj.equals("Hard")){
@@ -165,9 +163,9 @@ public class MainMenu implements Screen {
                     hard.setSpeed(4);
                     hard.setRemainingTime(30);
                     hard.setMode("Hard");
-                    enterMeaningfulNameHere.setScreen(new Timed(hard));
+                    enterMeaningfulNameHere.setScreen(new Standard(hard));
                 }
-                if(obj.equals("Advanced")){
+                if(obj.equals("Custom")){
                     enterMeaningfulNameHere.setScreen(new GameSettings(enterMeaningfulNameHere,gameSkin));
                 }
             }
@@ -177,7 +175,7 @@ public class MainMenu implements Screen {
         dialog.button("Easy", "Easy");
         dialog.button("Medium", "Medium");
         dialog.button("Hard", "Hard");
-        dialog.button("Advanced", "Advanced");
+        dialog.button("Custom", "Custom");
         dialog.button("Cancel",false);
         dialog.key(Input.Keys.ENTER, true);
         dialog.pack();

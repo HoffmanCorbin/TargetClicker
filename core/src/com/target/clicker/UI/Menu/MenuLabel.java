@@ -1,4 +1,4 @@
-package com.target.clicker.Menu;
+package com.target.clicker.UI.Menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

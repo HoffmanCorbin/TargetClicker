@@ -1,4 +1,4 @@
-package com.target.clicker.Game;
+package com.target.clicker.Game.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

@@ -1,4 +1,4 @@
-package com.target.clicker.Game;
+package com.target.clicker.Game.Modes;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
@@ -7,7 +7,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.target.clicker.Menu.MainMenu;
+import com.target.clicker.Game.Objects.Mark;
+import com.target.clicker.Game.Objects.Scorebox;
+import com.target.clicker.Game.Objects.Target;
+import com.target.clicker.UI.Menu.MainMenu;
 
 
 public class FlickAccuracy implements Screen {
@@ -28,10 +31,7 @@ public class FlickAccuracy implements Screen {
 
 
     public FlickAccuracy(Game game, Skin skin, int difficulty){
-
         timeRemaining = 30;
-
-
         Gdx.input.setInputProcessor(new GameInput());
 
         shape = new ShapeRenderer();
@@ -50,7 +50,6 @@ public class FlickAccuracy implements Screen {
 
     @Override
     public void render(float delta) {
-
         if(timeRemaining<=0)dispose();
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -58,8 +57,6 @@ public class FlickAccuracy implements Screen {
 
         shape.setColor(Color.WHITE);
         shape.begin(ShapeRenderer.ShapeType.Line);
-
-
 
         hitbox.setPosition(new Vector2(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f));
         hitbox.setRadius(Gdx.graphics.getHeight()/14f);

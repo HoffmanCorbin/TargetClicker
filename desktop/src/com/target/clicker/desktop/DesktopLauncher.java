@@ -13,11 +13,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.samples = 4;
 		config.resizable=false;
-
 		config.width = 1280;
 		config.height = 720;
-
-
 
 		new World(new Vector2(0f,0f), false);
 		new LwjglApplication(new TargetClicker(), config);

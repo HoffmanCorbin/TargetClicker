@@ -1,4 +1,4 @@
-package com.target.clicker.Menu;
+package com.target.clicker.UI.Menu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -9,12 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.target.clicker.Game.Timed;
-
-import java.awt.*;
+import com.target.clicker.Core.Settings;
+import com.target.clicker.Game.Modes.Standard;
 
 
 public class GameSettings implements Screen {
@@ -29,19 +27,12 @@ public class GameSettings implements Screen {
         prefs = new TimedPreferences(1,50,20,1);
         prefs = prefs.readFile();
 
-
-
-
-
         stage = new Stage(new ScreenViewport());
         Label title = new Label("Timed", gameSkin,"title-black");
         title.setAlignment(Align.center);
         title.setY(Gdx.graphics.getHeight()*9/10);
         title.setWidth(Gdx.graphics.getWidth());
         stage.addActor(title);
-
-
-
 
         final MenuLabel targetSize = new MenuLabel("Target Size: ", gameSkin, 10,3,1);
         stage.addActor(targetSize);
@@ -83,15 +74,17 @@ public class GameSettings implements Screen {
                 if((isValid(spawnSpeedSel.getText()))&& (isValid(targetSizeSel.getText()))&&(isValid(timeSel.getText()))
                         &&(isValid(quicknessSel.getText()))) {
 
-
                     prefs = new TimedPreferences(Integer.parseInt(spawnSpeedSel.getText()),
                             Integer.parseInt(targetSizeSel.getText()), Integer.parseInt(timeSel.getText()),
                             Integer.parseInt(quicknessSel.getText()));
                     prefs.storeEvents();
 
-                    enterMeaningfulNameHere.setScreen(new Timed(Integer.parseInt(spawnSpeedSel.getText()),
-                            Integer.parseInt(targetSizeSel.getText()), Integer.parseInt(timeSel.getText()),
-                            Integer.parseInt(quicknessSel.getText()), enterMeaningfulNameHere, gameSkin));
+                    Settings settings = new Settings(enterMeaningfulNameHere, gameSkin);
+                    settings.setQuickness(Integer.parseInt(quicknessSel.getText())); ;
+                    settings.setSpeed(Integer.parseInt(spawnSpeedSel.getText()));
+                    settings.setSize(Integer.parseInt(targetSizeSel.getText()));
+                    settings.setRemainingTime(Integer.parseInt(timeSel.getText()));
+                    enterMeaningfulNameHere.setScreen(new Standard(settings));
                 }
             }
             @Override

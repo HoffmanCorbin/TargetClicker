@@ -1,4 +1,4 @@
-package com.target.clicker;
+package com.target.clicker.Core;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -9,8 +9,9 @@ public class Settings{
     private int remainingTime;
     private int quickness;
     private Game game;
-    private Skin gameSkin;
     private String mode;
+
+    private final Skin gameSkin;
 
     public Settings(Game game, Skin gameskin){
         this.game = game;

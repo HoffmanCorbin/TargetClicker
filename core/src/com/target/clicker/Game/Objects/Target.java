@@ -1,4 +1,4 @@
-package com.target.clicker.Game;
+package com.target.clicker.Game.Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -45,14 +45,13 @@ public class Target{
      * @param size - The size of the target
      * @param speed - The speed of the target
      */
-    Target(Vector2 windowSize, float size, int speed){
+    public Target(Vector2 windowSize, float size, int speed){
         this.windowSize = windowSize;
 
         shape = new ShapeRenderer();
         hitbox = new Circle();
         hp =1;
         this.size = size*(Gdx.graphics.getHeight()/1080f);
-
 
         random = new Random();
         x= random.nextInt((int)((windowSize.x - (size*3))))+(size*1.5f);
@@ -67,28 +66,19 @@ public class Target{
     public void render(){
         // Renders if not destroyed
         if(!destroyed) {
-
             shape.setColor(Color.WHITE);
             shape.begin(ShapeRenderer.ShapeType.Filled);
-
             move();
-
-
             timeElapsed = timeElapsed + Gdx.graphics.getDeltaTime();
-
-
             hitbox.setPosition(new Vector2(x,y));
             hitbox.setRadius(size);
             shape.circle(x, y, size);
             shape.end();
-
         }
     }
 
     private void move(){
         if(x < windowSize.x - size/2f && x > size) {
-
-
             x =  (x + direction.x + (direction.x*((float)-timeElapsed/100f)));
         }
         else{
@@ -104,36 +94,26 @@ public class Target{
             y =  (y + direction.y + (direction.y *((float)-timeElapsed/100f)));
         }
     }
-    void dispose(){
+    public void dispose(){
         shape = null;
         hitbox = null;
     }
 
     private Vector2 determineLocation(){
-
-
         double x = Math.random()-0.5;
         double y = Math.random()-0.5;
 
         return new Vector2((float) ((float)x/Math.abs(x))*speed,((float) ((float)y/Math.abs(y)))*speed);
-
-
     }
 
     //TODO: add sound attribution at
 
-    boolean hit(float x, float y){
+    public boolean hit(float x, float y){
         if(hitbox.contains(x,y)) {
-
             Sound sound = Gdx.audio.newSound(Gdx.files.internal("pop.wav"));
             sound.play(1.0f);
             return true;
-
         }
         return false;
-        
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.target.clicker;
+package com.target.clicker.UI.Menu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -8,32 +8,23 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.target.clicker.Menu.MainMenu;
-import com.target.clicker.Menu.MenuLabel;
-import jdk.nashorn.internal.parser.JSONParser;
+import com.target.clicker.Core.GameStats;
+import com.target.clicker.UI.Menu.MainMenu;
+import com.target.clicker.UI.Menu.MenuLabel;
 import org.json.*;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 
 public class PostGameResults implements Screen {
     private Stage stage;
     private GameStats stats;
 
-
     public PostGameResults(final Game game, final Skin gameSkin, GameStats stats, String mode) {
-
-
-
         stage = new Stage(new ScreenViewport());
-
 
         Label title = new Label("Mode: " + mode, gameSkin,"title-black");
         title.setY(Gdx.graphics.getHeight()-50);
@@ -41,18 +32,16 @@ public class PostGameResults implements Screen {
 
         stage.addActor(title);
 
-
         final MenuLabel scoreLbl = new MenuLabel("Score: ", gameSkin, 10,1,1);
         stage.addActor(scoreLbl);
 
         final MenuLabel score = new MenuLabel(String.valueOf(stats.getScore()) , gameSkin,10,1,2);
         stage.addActor(score);
 
-
         final MenuLabel adjScoreLbl = new MenuLabel("Hit %: ", gameSkin,10,2,1);
         stage.addActor(adjScoreLbl);
 
-        final MenuLabel adjScore = new MenuLabel(String.valueOf(1.0*stats.getHits()/(stats.getHits()+stats.getMisses())), gameSkin,10,2,2);
+        final MenuLabel adjScore = new MenuLabel(String.valueOf(1.0*stats.getHits()/(stats.getHits()+stats.getMisses())*100), gameSkin,10,2,2);
         stage.addActor(adjScore);
 
         final MenuLabel targetsHitLbl = new MenuLabel("Targets Hit: ", gameSkin, 10, 3,1);
@@ -73,7 +62,6 @@ public class PostGameResults implements Screen {
         final MenuLabel time = new MenuLabel(String.valueOf(stats.getTime()),gameSkin,10,5,2);
         stage.addActor(time);
 
-
         TextButton playButton = new TextButton("Back",gameSkin);
         playButton.setWidth(Gdx.graphics.getWidth()/2f);
         playButton.setPosition(Gdx.graphics.getWidth()/2f-playButton.getWidth()/2,
@@ -90,26 +78,17 @@ public class PostGameResults implements Screen {
             }
         });
         stage.addActor(playButton);
-
-
-        this.stats=stats;
+        this.stats = stats;
 
         try {
             fileWrite();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void fileWrite() throws IOException {
-
         JSONArray array;
-
-
-
-
         if(Files.exists(Paths.get("stats.json"))) {
             String text = new String(Files.readAllBytes(Paths.get("stats.json")));
             if(text.equals(""))array = new JSONArray();
@@ -120,19 +99,13 @@ public class PostGameResults implements Screen {
             array = new JSONArray();
         }
 
-
-
-
-
-
-
         Writer writer = new FileWriter("stats.json");
         JSONWriter jsonWrite = new JSONWriter(writer);
         JSONObject jsonStats = new JSONObject();
         jsonStats.put("Mode", stats.getMode());
         jsonStats.put("Hits", stats.getHits());
         jsonStats.put("Misses",stats.getMisses());
-        jsonStats.put("Hit Percent",1.0*stats.getHits()/(stats.getHits()+stats.getMisses()));
+        jsonStats.put("Hit Percent", 1.0 * stats.getHits()/(stats.getHits() + stats.getMisses()));
         jsonStats.put("Score", stats.getScore());
 
         array.put(jsonStats);

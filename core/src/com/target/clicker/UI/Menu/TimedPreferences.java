@@ -1,4 +1,4 @@
-package com.target.clicker.Menu;
+package com.target.clicker.UI.Menu;
 
 import java.io.*;
 
